@@ -12,4 +12,5 @@ RUN chmod 755 /usr/local/bin/my_init.sh
 
 RUN mkdir -p /etc/my_init.d /var/log/supervisor
 
+VOLUME ["/var/log/supervisor"]
 CMD ["/usr/local/bin/my_init.sh"]
