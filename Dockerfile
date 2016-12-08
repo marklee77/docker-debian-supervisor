@@ -5,11 +5,15 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         cron \
+        locales \
         logrotate \
         supervisor \
         syslog-ng-core && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/* && \
     rm -f /etc/cron.daily/{apt,dpkg,passwd}
+
+RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
+ENV LANG=C.UTF-8
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY my_init.sh /usr/local/bin/my_init.sh
