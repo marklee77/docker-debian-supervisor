@@ -3,7 +3,7 @@ MAINTAINER Mark Stillwell <mark@stillwell.me>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
-    apt-get -y install supervisor && \
+    apt-get -y install apt-utils supervisor && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
