@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Mark Stillwell <mark@stillwell.me>
 
-RUN rm -f /etc/cron.daily/*
+RUN rm -f /etc/cron.*/*
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
