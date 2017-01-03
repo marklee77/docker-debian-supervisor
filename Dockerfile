@@ -1,21 +1,22 @@
-FROM debian:jessie
+FROM ubuntu:xenial
 MAINTAINER Mark Stillwell <mark@stillwell.me>
 
-RUN rm -f /etc/cron.daily/*
+RUN rm -f /etc/cron.*/*
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         cron \
-        locales \
+        language-pack-en \
         logrotate \
         supervisor \
         syslog-ng-core && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/* && \
-    rm -f /etc/cron.daily/{apt,dpkg,passwd}
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
-ENV LANG=C.UTF-8
+RUN locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 LC_TYPE=en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_TYPE en_US.UTF-8
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY my_init.sh /usr/local/bin/my_init.sh

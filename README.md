@@ -7,8 +7,8 @@ up supervisor, along with syslog-ng and cron. Additional supervisor config
 files can be placed in /etc/supervisor/conf.d. For an example image see
 marklee77/slapd.
 
-This work was inspired by phusion/baseimage, but I needed something that would
-work with Debian jessie.
+This work was inspired by phusion/baseimage, but is hopefully simpler and users
+supervisor in place of runit.
 
 author
 ======
