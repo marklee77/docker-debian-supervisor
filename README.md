@@ -8,7 +8,7 @@ files can be placed in /etc/supervisor/conf.d. For an example image see
 marklee77/slapd.
 
 This work was inspired by phusion/baseimage, but I needed something that would
-work with Debian jessie.
+work with alpine linux.
 
 author
 ======
