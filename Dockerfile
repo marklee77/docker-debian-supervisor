@@ -32,6 +32,4 @@ RUN chmod 0755 /usr/local/bin/my_init.sh
 
 RUN mkdir -m 0755 -p /etc/my_init.d /var/log/supervisor
 
-VOLUME ["/var/log/supervisor"]
-
 CMD ["/usr/local/bin/my_init.sh"]
