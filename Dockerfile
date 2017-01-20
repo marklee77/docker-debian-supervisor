@@ -18,18 +18,19 @@ RUN locale-gen en_US.UTF-8 && \
 ENV LANG en_US.UTF-8
 ENV LC_TYPE en_US.UTF-8
 
+RUN rm /etc/logrotate.d/*
+
+RUN rm /etc/supervisor/*
 COPY root/etc/supervisor/supervisord.conf /etc/supervisor/
 RUN chmod 0644 /etc/supervisor/supervisord.conf
 
+RUN rm /etc/syslog-ng/*
 COPY root/etc/syslog-ng/syslog-ng.conf /etc/syslog-ng/
 RUN chmod 0644 /etc/syslog-ng/syslog-ng.conf
-
-COPY root/etc/logrotate.d/syslog-ng /etc/logrotate.d/
-RUN chmod 0644 /etc/logrotate.d/syslog-ng
 
 COPY root/usr/local/bin/my_init.sh /usr/local/bin/
 RUN chmod 0755 /usr/local/bin/my_init.sh
 
-RUN mkdir -m 0755 -p /etc/my_init.d /var/log/supervisor
+RUN mkdir -m 0755 -p /etc/my_init.d
 
 CMD ["/usr/local/bin/my_init.sh"]
