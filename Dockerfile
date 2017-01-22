@@ -1,12 +1,13 @@
 FROM alpine:latest
 MAINTAINER Mark Stillwell <mark@stillwell.me>
 
-RUN apk add --update --no-cache \
+RUN apk add --update-cache --no-cache \
         dcron \
         logrotate \
         ssmtp \
         supervisor \
-        syslog-ng
+        syslog-ng && \
+    rm -rf /var/cache/apk/*
 
 RUN rm /etc/logrotate.d/*
 
