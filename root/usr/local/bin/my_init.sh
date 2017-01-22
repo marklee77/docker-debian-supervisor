@@ -9,5 +9,4 @@ if [ -d /etc/my_init.d ]; then
     done
 fi
 
-touch /var/log/syslog
 exec /usr/bin/supervisord -c /etc/supervisord.conf
