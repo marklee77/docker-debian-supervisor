@@ -24,7 +24,7 @@ RUN chmod 0755 /etc/my_init.d/05-syslog-setup
 COPY root/usr/local/bin/my_init.sh /usr/local/bin/
 RUN chmod 0755 /usr/local/bin/my_init.sh
 
-RUN mkdir -m 0755 -p /etc/my_init.d /etc/supervisor.d
+RUN mkdir -m 0755 -p /etc/my_init.d /etc/supervisor/conf.d
 
 EXPOSE 601
 
