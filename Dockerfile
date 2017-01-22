@@ -9,6 +9,7 @@ RUN apt-get update && \
         cron \
         language-pack-en \
         logrotate \
+        ssmtp \
         supervisor \
         syslog-ng-core && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
@@ -19,6 +20,10 @@ ENV LANG en_US.UTF-8
 ENV LC_TYPE en_US.UTF-8
 
 RUN rm /etc/logrotate.d/*
+
+RUN rm /etc/ssmtp/*
+COPY root/etc/my_init.d/05-ssmtp-setup /etc/my_init.d/
+RUN chmod 0755 /etc/my_init.d/05-ssmtp-setup
 
 COPY root/etc/supervisor/supervisord.conf /etc/supervisor/
 RUN chmod 0644 /etc/supervisor/supervisord.conf
