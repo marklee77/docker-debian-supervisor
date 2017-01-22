@@ -25,6 +25,7 @@ COPY root/usr/local/bin/my_init.sh /usr/local/bin/
 RUN chmod 0755 /usr/local/bin/my_init.sh
 
 RUN mkdir -m 0755 -p /etc/my_init.d /etc/supervisor/conf.d
+RUN rm -rf /var/log/*
 
 EXPOSE 601
 
