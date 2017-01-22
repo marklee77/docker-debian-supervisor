@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ -z "$ssmtp_mailhub" ] && exit 0
+
+umask 0022
+
+cat > /etc/ssmtp/ssmtp.conf <<EOF
+mailhub=$ssmtp_mailhub
+EOF
