@@ -31,11 +31,11 @@ RUN rm -rf /etc/syslog-ng/*
 COPY root/etc/my_init.d/05-syslog-setup /etc/my_init.d/
 RUN chmod 0755 /etc/my_init.d/05-syslog-setup
 
-COPY root/usr/local/bin/my_init.sh /usr/local/bin/
-RUN chmod 0755 /usr/local/bin/my_init.sh
+COPY root/usr/local/sbin/my_init.sh /usr/local/sbin/
+RUN chmod 0755 /usr/local/sbin/my_init.sh
 
 RUN mkdir -m 0755 -p /etc/my_init.d
 
 EXPOSE 601
 
-CMD ["/usr/local/bin/my_init.sh"]
+CMD ["/usr/local/sbin/my_init.sh"]
