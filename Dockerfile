@@ -6,6 +6,7 @@ RUN rm -f /etc/cron.*/*
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
+        ca-certificates \
         cron \
         locales \
         logrotate \
@@ -17,13 +18,15 @@ RUN apt-get update && \
         /etc/logrotate.d/* \
         /etc/ssmtp/* \
         /etc/syslog-ng/* \
+        /usr/local/share/ca-certificates \
         /var/lib/apt/lists/* \
         /var/cache/apt/* \
 
 RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN mkdir -m 0755 -p /etc/my_init.d
+RUN mkdir -m 0755 -p /etc/my_init.d /container/ca-certificates
+RUN ln -s /container/ca-certificates /usr/local/share/ca-certificates
 
 COPY root/usr/local/sbin/my_init.sh /usr/local/sbin/
 RUN chmod 0755 /usr/local/sbin/my_init.sh
