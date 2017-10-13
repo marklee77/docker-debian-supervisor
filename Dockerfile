@@ -21,6 +21,8 @@ RUN apt-get update && \
         /var/lib/apt/lists/* \
         /var/cache/apt/*
 
+RUN mkdir -m 0755 -p /etc/ssl/common
+
 RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
 ENV LANG=C.UTF-8
 
