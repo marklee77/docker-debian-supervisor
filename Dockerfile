@@ -18,12 +18,10 @@ RUN apt-get update && \
         /etc/ssmtp/* \
         /etc/syslog-ng/* \
         /var/cache/apt/* \
-        /var/lib/apt/lists/* \
-        /var/log
+        /var/lib/apt/lists/*
 
 RUN mkdir -m 0755 -p /data
 VOLUME ["/data"]
-RUN ln -s /data/log /var/log
 
 RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
 ENV LANG=C.UTF-8
