@@ -2,6 +2,7 @@ FROM alpine:latest
 MAINTAINER Mark Stillwell <mark@stillwell.me>
 
 RUN apk add --update-cache --no-cache \
+        ca-certificates \
         dcron \
         logrotate \
         ssmtp \
@@ -13,6 +14,8 @@ RUN apk add --update-cache --no-cache \
         /etc/syslog-ng/* \
         /var/cache/apk/* \
         /var/log/*
+
+RUN mkdir -m 0755 -p /etc/ssl/common
 
 COPY root/usr/local/sbin/my_init.sh /usr/local/sbin/
 RUN chmod 0755 /usr/local/sbin/my_init.sh
