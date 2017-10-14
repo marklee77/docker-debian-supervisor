@@ -4,6 +4,12 @@
 
 umask 0022
 
-cat > /etc/ssmtp/ssmtp.conf <<EOF
+config_file=/etc/ssmtp/ssmtp.conf
+[ -L "$config_file" ] && config_file="$(readlink "$config_file")"
+[ -f "$config_file" ] && exit 0
+config_dir="$(dirname "$config_file")"
+[ -d "$config_dir" ] || mkdir -m 0755 -p "$config_dir"
+
+cat > "$config_file" <<EOF
 mailhub=$ssmtp_mailhub
 EOF
