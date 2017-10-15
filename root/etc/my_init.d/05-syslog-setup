@@ -42,6 +42,11 @@ source s_all {$(
   fi)
 };
 
+template template_date_format {
+    template("\${YEAR}-\${MONTH}-\${DAY} \${HOUR}:\${MIN}:\${SEC} \${HOST} \${MSGHDR}\${MSG}\n");
+    template_escape(no);
+};
+
 destination d_all {$(
   echo
   if [ -n "$syslog_tcp_dest_host" ]; then
@@ -49,7 +54,7 @@ destination d_all {$(
     echo -n 'transport("tcp") '
     echo "port(\"$syslog_tcp_dest_port\"));"
   else
-    echo '  pipe("/proc/1/fd/1");'
+    echo '  pipe("/proc/1/fd/1" template(template_date_format));'
   fi)
 };
 
