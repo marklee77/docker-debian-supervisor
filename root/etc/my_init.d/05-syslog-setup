@@ -13,7 +13,13 @@ fi
 
 umask 0022
 
-cat > /etc/syslog-ng/syslog-ng.conf <<EOF
+config_file=/etc/syslog-ng/syslog-ng.conf
+[ -L "$config_file" ] && config_file="$(readlink "$config_file")"
+[ -f "$config_file" ] && exit 0
+config_dir="$(dirname "$config_file")"
+[ -d "$config_dir" ] || mkdir -m 0755 -p "$config_dir"
+
+[ -f "$config_file" ] || cat > "$config_file" <<EOF
 @version: 3.7
 
 options {
@@ -36,6 +42,11 @@ source s_all {$(
   fi)
 };
 
+template template_pipe_format {
+    template("\${YEAR}-\${MONTH}-\${DAY} \${HOUR}:\${MIN}:\${SEC},\${MSEC} \${LEVEL} \${MSGHDR}\${MSG}\n");
+    template_escape(no);
+};
+
 destination d_all {$(
   echo
   if [ -n "$syslog_tcp_dest_host" ]; then
@@ -43,7 +54,7 @@ destination d_all {$(
     echo -n 'transport("tcp") '
     echo "port(\"$syslog_tcp_dest_port\"));"
   else
-    echo '  pipe("/proc/1/fd/1");'
+    echo '  pipe("/proc/1/fd/1" template(template_pipe_format));'
   fi)
 };
 
