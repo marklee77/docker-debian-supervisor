@@ -31,7 +31,7 @@ RUN ln -s /data/syslog-ng/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 
 EXPOSE 601
 
-RUN mkdir -m 0755 -p /etc/my_init.d /etc/supervisor/conf.d
+RUN mkdir -m 0755 -p /etc/supervisor/conf.d
 COPY root/etc/supervisor/supervisord.conf /etc/supervisor/
 RUN chmod 0644 /etc/supervisor/supervisord.conf
 
