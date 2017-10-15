@@ -9,7 +9,6 @@ config_file=/etc/ssmtp/ssmtp.conf
 [ -f "$config_file" ] && exit 0
 config_dir="$(dirname "$config_file")"
 [ -d "$config_dir" ] || mkdir -m 0755 -p "$config_dir"
-
-cat > "$config_file" <<EOF
+[ -f "$config_file" ] || cat > "$config_file" <<EOF
 mailhub=$ssmtp_mailhub
 EOF

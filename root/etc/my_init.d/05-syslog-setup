@@ -18,8 +18,7 @@ config_file=/etc/syslog-ng/syslog-ng.conf
 [ -f "$config_file" ] && exit 0
 config_dir="$(dirname "$config_file")"
 [ -d "$config_dir" ] || mkdir -m 0755 -p "$config_dir"
-
-cat > /etc/syslog-ng/syslog-ng.conf <<EOF
+[ -f "$config_file" ] || cat > "$config_file" <<EOF
 @version: 3.5
 
 options {
