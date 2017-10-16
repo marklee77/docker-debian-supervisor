@@ -10,4 +10,4 @@ if [ -d /etc/my_init.d ]; then
     done
 fi
 
-exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+exec /usr/bin/supervisord -c /etc/supervisord.conf
