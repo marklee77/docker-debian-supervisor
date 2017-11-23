@@ -36,7 +36,7 @@ options {
 source s_all {$(
   echo
   echo '  internal();'
-  echo '  unix-dgram("/dev/log");'
+  echo '  unix-dgram("/tmp/log");'
   if [ "$syslog_tcp_listen" = "yes" ]; then
     echo '  syslog();'
   fi)
