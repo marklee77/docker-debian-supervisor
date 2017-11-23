@@ -13,6 +13,10 @@ fi
 
 umask 0022
 
+dir=/var/lib/syslog-ng
+[ -L "$dir" ] && dir="$(readlink "$dir")"
+mkdir -m 0700 -p "$dir"
+
 config_file=/etc/syslog-ng/syslog-ng.conf
 [ -L "$config_file" ] && config_file="$(readlink "$config_file")"
 [ -f "$config_file" ] && exit 0

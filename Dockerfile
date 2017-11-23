@@ -39,6 +39,8 @@ RUN ln -s /data/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
 COPY root/etc/my_init.d/05-syslog-setup /etc/my_init.d/
 RUN chmod 0755 /etc/my_init.d/05-syslog-setup
 RUN ln -s /data/syslog-ng/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
+RUN rm -rf /var/lib/syslog-ng && \
+    ln -s /tmp/syslog-ng /var/lib/syslog-ng
 EXPOSE 601
 
 COPY root/usr/local/sbin/my_init.sh /usr/local/sbin/
