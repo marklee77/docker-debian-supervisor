@@ -16,6 +16,7 @@ RUN apk add --update-cache --no-cache \
 RUN mkdir -m 0755 -p /data
 RUN rm -rf /var/run && ln -s /run /var/run
 RUN rm -rf /run && ln -s /tmp/run /run
+RUN ls -s /tmp/log /dev/log
 VOLUME ["/data", "/tmp"]
 
 RUN mkdir -m 0755 -p /etc/my_init.d
