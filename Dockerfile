@@ -22,7 +22,6 @@ RUN apt-get update && \
 
 RUN mkdir -m 0755 -p /data
 RUN rm -rf /run && ln -s /tmp/run /run
-RUN ln -s /tmp/log /dev/log
 VOLUME ["/data", "/tmp"]
 
 RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
