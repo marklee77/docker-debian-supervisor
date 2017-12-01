@@ -19,8 +19,10 @@ RUN apt-get update && \
         /var/cache/apt/* \
         /var/lib/apt/lists/*
 
-RUN mkdir -m 0755 -p /data
-RUN rm -rf /run && ln -s /tmp/run /run
+RUN mkdir -m 0755 -p /data && \
+    rm -rf /run /var/run && \
+    ln -s /run /var/run && \
+    ln -s /tmp/run /run
 VOLUME ["/data", "/tmp"]
 
 RUN locale-gen en_US.UTF-8 && \
@@ -28,10 +30,10 @@ RUN locale-gen en_US.UTF-8 && \
 ENV LANG en_US.UTF-8
 ENV LC_TYPE en_US.UTF-8
 
-RUN mkdir -m 0755 -p /etc/my_init.d
-
 COPY root/etc/supervisor/supervisord.conf /etc/supervisor/
 RUN chmod 0644 /etc/supervisor/supervisord.conf
+
+RUN mkdir -m 0755 -p /etc/my_init.d /usr/local/share/my_init
 
 COPY root/etc/my_init.d/05-ssmtp-setup /etc/my_init.d/
 RUN chmod 0755 /etc/my_init.d/05-ssmtp-setup
@@ -44,6 +46,7 @@ RUN rm -rf /var/lib/syslog-ng && \
     ln -s /tmp/syslog-ng /var/lib/syslog-ng
 EXPOSE 601
 
+COPY root/usr/local/share/my_init/functions.sh /usr/local/share/my_init/
 COPY root/usr/local/sbin/my_init.sh /usr/local/sbin/
-RUN chmod 0755 /usr/local/sbin/my_init.sh
+RUN chmod 0755 /usr/local/sbin/my_init.sh /usr/local/share/my_init/functions.sh
 CMD ["/usr/local/sbin/my_init.sh"]
