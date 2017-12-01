@@ -1,4 +1,5 @@
 #!/bin/sh
+. /usr/local/share/my_init/functions.sh
 
 : ${syslog_tcp_listen:=no}
 
@@ -13,16 +14,9 @@ fi
 
 umask 0022
 
-dir=/var/lib/syslog-ng
-[ -L "$dir" ] && dir="$(readlink "$dir")"
-mkdir -m 0700 -p "$dir"
+mkdir -m 0700 "$(mypath /var/lib/syslog-ng)"
 
-config_file=/etc/syslog-ng/syslog-ng.conf
-[ -L "$config_file" ] && config_file="$(readlink "$config_file")"
-[ -f "$config_file" ] && exit 0
-config_dir="$(dirname "$config_file")"
-[ -d "$config_dir" ] || mkdir -m 0755 -p "$config_dir"
-[ -f "$config_file" ] || cat > "$config_file" <<EOF
+cat > "$(mypath /etc/syslog-ng/syslog-ng.conf)" <<EOF
 @version: 3.5
 
 options {

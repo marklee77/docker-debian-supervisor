@@ -1,14 +1,10 @@
 #!/bin/sh
+. /usr/local/share/my_init/functions.sh
 
 [ -z "$ssmtp_mailhub" ] && exit 0
 
 umask 0022
 
-config_file=/etc/ssmtp/ssmtp.conf
-[ -L "$config_file" ] && config_file="$(readlink "$config_file")"
-[ -f "$config_file" ] && exit 0
-config_dir="$(dirname "$config_file")"
-[ -d "$config_dir" ] || mkdir -m 0755 -p "$config_dir"
-[ -f "$config_file" ] || cat > "$config_file" <<EOF
+cat > "$(mypath /etc/ssmtp/ssmtp.conf)" <<EOF
 mailhub=$ssmtp_mailhub
 EOF
