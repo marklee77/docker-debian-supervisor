@@ -37,7 +37,7 @@ source s_all {$(
   fi)
 };
 
-template template_file_format {
+template output_format {
     template("\${YEAR}-\${MONTH}-\${DAY} \${HOUR}:\${MIN}:\${SEC},\${MSEC} \${LEVEL} \${MSGHDR}\${MSG}\n");
     template_escape(no);
 };
@@ -49,7 +49,7 @@ destination d_all {$(
     echo -n 'transport("tcp") '
     echo "port(\"$syslog_tcp_dest_port\"));"
   else
-    echo '  file("/proc/1/fd/1" template(template_file_format));'
+    echo '  pipe("/proc/1/fd/1" template(output_format));'
   fi)
 };
 
