@@ -17,7 +17,7 @@ umask 0022
 mkdir -m 0700 "$(mypath /var/lib/syslog-ng)"
 
 cat > "$(mypath /etc/syslog-ng/syslog-ng.conf)" <<EOF
-@version: 3.5
+@version: 3.8
 
 options {
   chain_hostnames(0);

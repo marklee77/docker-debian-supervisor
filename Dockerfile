@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 LABEL maintainer="Mark Stillwell <mark@stillwell.me>"
 
 RUN rm -f /etc/cron.*/*
