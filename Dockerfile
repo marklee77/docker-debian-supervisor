@@ -8,12 +8,10 @@ RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         cron \
         language-pack-en \
-        logrotate \
         ssmtp \
         supervisor \
         syslog-ng-core && \
     rm -rf \
-        /etc/logrotate.d/* \
         /etc/ssmtp/* \
         /etc/syslog-ng/* \
         /var/cache/apt/* \
