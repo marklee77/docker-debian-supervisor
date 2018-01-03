@@ -3,12 +3,10 @@ LABEL maintainer="Mark Stillwell <mark@stillwell.me>"
 
 RUN apk add --update-cache --no-cache \
         dcron \
-        logrotate \
         ssmtp \
         supervisor \
         syslog-ng && \
     rm -rf \
-        /etc/logrotate.d/* \
         /etc/ssmtp/* \
         /etc/syslog-ng/* \
         /var/cache/apk/*
