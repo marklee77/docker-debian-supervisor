@@ -3,10 +3,12 @@ LABEL maintainer="Mark Stillwell <mark@stillwell.me>"
 
 RUN apk add --update-cache --no-cache \
         dumb-init \
+        syslog-ng \
         ssmtp \
         supervisor && \
     rm -rf \
         /etc/ssmtp/* \
+        /etc/syslog-ng/* \
         /var/cache/apk/*
 
 RUN mkdir -m 0755 -p /etc/my_init.d /usr/local/share/my_init
@@ -21,3 +23,6 @@ RUN chmod 0644 /etc/supervisord.conf
 
 COPY root/etc/my_init.d/05-ssmtp-setup /etc/my_init.d/
 RUN chmod 0755 /etc/my_init.d/05-ssmtp-setup
+
+COPY root/etc/my_init.d/05-syslog-setup /etc/my_init.d/
+RUN chmod 0755 /etc/my_init.d/05-syslog-setup
