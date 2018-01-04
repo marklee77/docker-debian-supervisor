@@ -9,7 +9,8 @@ RUN apk add --update-cache --no-cache \
     rm -rf \
         /etc/ssmtp/* \
         /etc/syslog-ng/* \
-        /var/cache/apk/*
+        /var/cache/apk/* \
+        /var/log/*
 
 RUN mkdir -m 0755 -p /etc/my_init.d /usr/local/share/my_init
 COPY root/usr/local/share/my_init/functions.sh /usr/local/share/my_init/
