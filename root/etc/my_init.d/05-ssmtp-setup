@@ -3,8 +3,9 @@
 
 [ -z "$ssmtp_mailhub" ] && exit 0
 
-umask 0022
+umask 022
 
-cat > "$(mypath /etc/ssmtp/ssmtp.conf)" <<EOF
+cat >/etc/ssmtp/ssmtp.conf <<EOF
+root=root
 mailhub=$ssmtp_mailhub
 EOF
