@@ -12,11 +12,9 @@ fi
 
 : ${syslog_tcp_dest_port:=601}
 
-umask 0022
+umask 022
 
-mkdir -m 0700 "$(mypath /var/lib/syslog-ng)"
-
-cat > "$(mypath /etc/syslog-ng/syslog-ng.conf)" <<EOF
+cat >/etc/syslog-ng/syslog-ng.conf <<EOF
 @version: 3.5
 
 options {
@@ -50,8 +48,10 @@ destination d_all {$(
     echo -n "  syslog(\"$syslog_tcp_dest_host\" "
     echo -n 'transport("tcp") '
     echo "port(\"$syslog_tcp_dest_port\"));"
+  elif [ -f /dev/stdout ]; then
+    echo '  file("/dev/stdout" template(output_format));'
   else
-    echo '  pipe("/proc/1/fd/1" template(output_format));'
+    echo '  pipe("/dev/stdout" template(output_format));'
   fi)
 };
 
