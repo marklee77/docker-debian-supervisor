@@ -12,7 +12,7 @@ fi
 
 : ${syslog_tcp_dest_port:=601}
 
-umask 0022
+umask 022
 
 cat >/etc/syslog-ng/syslog-ng.conf <<EOF
 @version: 3.9
