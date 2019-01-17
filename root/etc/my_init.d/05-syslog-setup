@@ -15,7 +15,7 @@ fi
 umask 022
 
 cat >/etc/syslog-ng/syslog-ng.conf <<EOF
-@version: 3.9
+@version: 3.13
 
 options {
   chain_hostnames(0);
